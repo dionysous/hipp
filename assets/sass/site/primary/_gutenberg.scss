@@ -1,0 +1,22 @@
+.alignfull,
+.alignwide {
+	left: 50%;
+	position: relative;
+	transform: translate(-50%);
+	width: 100vw;
+}
+
+.alignwide {
+	max-width: 1024px;
+}
+
+.alignfull img,
+.alignwide img {
+	width: 100%;
+}
+
+p.alignfull,
+p.alignwide {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}

@@ -79,6 +79,9 @@ if ( ! function_exists( 'hipp_setup' ) ) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		) );
+		
+		// Add Gutenberg align-wide and align-full support.
+		add_theme_support( 'align-wide' );
 	}
 endif;
 add_action( 'after_setup_theme', 'hipp_setup' );
