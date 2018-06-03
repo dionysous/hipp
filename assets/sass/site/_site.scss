@@ -1,6 +1,18 @@
 // @import "../layout/content-sidebar";
 // @import "../layout/sidebar-content";
 
+.container {
+	width: calc(100% - #{$size__container_padding});
+	max-width: $size__container;
+	margin: 0 auto;
+	position: relative;
+}
+
+/*--------------------------------------------------------------
+## Posts and pages
+--------------------------------------------------------------*/
+@import "header/site-header";
+
 /*--------------------------------------------------------------
 ## Posts and pages
 --------------------------------------------------------------*/
