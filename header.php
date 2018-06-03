@@ -26,27 +26,25 @@
 
 	<header id="masthead" class="site-header">
 		<div class="container">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" class="logo-link">
 				<div class="site-branding">
 					<?php
 					the_custom_logo();
+					
 					?>
-					<div id="title-wrap">
-						<?php
-						if ( is_front_page() && is_home() ) :
-							?>
-							<h1 class="site-title"><?php bloginfo( 'name' ); ?></h1>
+					<div class="title-wrap" id="title-wrap"<?php if ( display_header_text() == false ) : ?> style="display: none"<?php endif; ?>>
+						<div class="site-title">
 							<?php
-						else :
-							?>
-							<p class="site-title"><?php bloginfo( 'name' ); ?></p>
-							<?php
-						endif;
-						$hipp_description = get_bloginfo( 'description', 'display' );
-						if ( $hipp_description || is_customize_preview() ) :
-							?>
-							<p class="site-description"><?php echo $hipp_description; /* WPCS: xss ok. */ ?></p>
-						<?php endif; ?>
+							$hipp_title = str_replace( '.design', '<span>.design</span>', get_bloginfo( 'name' ) );
+							
+							echo $hipp_title; 
+							
+							$hipp_description = get_bloginfo( 'description', 'display' );
+							
+							if ( $hipp_description || is_customize_preview() ) : ?>
+							<div class="site-description"><?php echo $hipp_description; /* WPCS: xss ok. */ ?></div>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div><!-- .site-branding -->
 			</a>

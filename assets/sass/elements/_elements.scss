@@ -16,6 +16,7 @@ body {
 	background: $color__background-body; /* Fallback for when there is no custom background color defined. */
 	box-sizing: border-box;
 	margin-top: 150px;
+	line-height: $font__line-height-body;
 	
 	@media only screen and (-webkit-min-device-pixel-ratio: 2),
 	only screen and (min--moz-device-pixel-ratio: 2),

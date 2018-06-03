@@ -21,10 +21,91 @@
 	.container {
 		height: 100%;
 	}
+	
+	.title-wrap {
+		position: absolute;
+		top: 0;
+		left: 115px;
+		bottom: 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		width: 130px;
+		font-size: 27px;
+		overflow: hidden;
+		line-height: 1.3;
+	}
+	
+	.site-branding {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		min-width: 340px;
+	}
+	
+	.logo-link {
+		display: inline-block;
+		color: #525252;
+		text-decoration: none;
+		transition: all .1s ease;
+	}
+	
+	.site-description a,
+	.site-description {
+		color: #e88d0c;
+		font-size: 1rem;
+		transition: all .5s ease;
+		overflow: hidden;
+		height: 2.2em;
+		line-height: 1;
+	}
+	
+	.logo {
+		height: 80%;
+		width: auto;
+		position: absolute;
+		top: 8%;
+		left: 0;
+		bottom: 0;
+	}
+	
+	.site-title {
+		font-weight: 300;
+		transition: font-size .1s ease;
+		
+		span {
+			transition: color .1s ease;
+		}
+	}
 }
 
 .admin-bar {
 	.site-header {
 		top: 32px;
 	}
+}
+
+.smaller {
+	
+	.site-title {
+		font-size: 1rem;
+		
+		span {
+			color: #e88d0c;
+		}
+	}
+	
+	.site-description {
+		opacity: 0;
+		height: 0;
+	}
+	
+	.title-wrap {
+		width: 105px;
+	}
+}
+
+#site-navigation {
+	display: none;
 }
