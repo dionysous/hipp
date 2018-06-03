@@ -123,11 +123,17 @@ add_action( 'widgets_init', 'hipp_widgets_init' );
  * Enqueue scripts and styles.
  */
 function hipp_scripts() {
-	wp_enqueue_style( 'hipp-style', get_stylesheet_uri() );
-
-	wp_enqueue_script( 'hipp-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
-
-	wp_enqueue_script( 'hipp-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
+	// Check for SCRIPT_DEBUG
+	$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+	$version = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? time() : wp_get_theme()->get( 'Version' );
+	
+	wp_enqueue_style( 'hipp-style', get_template_directory_uri() . '/style' . $suffix . '.css', [], $version );
+	
+	wp_enqueue_script( 'hipp-navigation', get_template_directory_uri() . '/assets/js/navigation' . $suffix . '.js', [], $version, true );
+	
+	wp_enqueue_script( 'hipp-menu-magic', get_template_directory_uri() . '/assets/js/menu-magic' . $suffix . '.js', [], $version, true );
+	
+	wp_enqueue_script( 'hipp-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix' . $suffix . '.js', array(), $version, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -154,3 +160,37 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Allow more mime types through WordPress Media Uploader
+ *
+ * @param $mimes 
+ */
+function hipp_mime_types( $mimes ) {
+	// add SVG support to WordPress
+	$mimes['svg'] = 'image/svg+xml';
+	
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'hipp_mime_types' );
+
+/**
+ * Customize custom logo output.
+ */
+function hipp_custom_logo() {
+	$custom_logo_id = get_theme_mod( 'custom_logo' );
+	$custom_logo_filetype = get_post_mime_type( $custom_logo_id );
+	// Output SVG code inline.
+	if ( strpos( $custom_logo_filetype, 'svg' ) ) {
+		$html = file_get_contents( wp_get_attachment_url( $custom_logo_id ) );
+	} 
+	// Output img-elemt with site logo.
+	else {
+		$html = wp_get_attachment_image( $custom_logo_id, 'full', false, [
+			'class' => 'custom-logo'
+		] );
+	}
+	
+	return $html;
+}
+add_filter( 'get_custom_logo', 'hipp_custom_logo' );
